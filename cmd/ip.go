@@ -29,7 +29,7 @@ import (
 var ipCmd = &cobra.Command{
 	Use:   "ip",
 	Short: "Get the client IP address",
-	Args: cobra.NoArgs,
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		Println(Post("getIP", nil))
 	},

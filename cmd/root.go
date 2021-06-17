@@ -88,7 +88,7 @@ func initConfig() {
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
-	
+
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
@@ -145,8 +145,12 @@ func Post(method string, formData map[string]string) (*string, error) {
 	return &data, nil
 }
 
-func IfSetElse(value bool, whenSet string, whenNotSet string) string { 
-	if value { return whenSet } else { return whenNotSet } 
+func IfSetElse(value bool, whenSet string, whenNotSet string) string {
+	if value {
+		return whenSet
+	} else {
+		return whenNotSet
+	}
 }
 
 func Println(data *string, err error) {

@@ -28,8 +28,8 @@ import (
 // statusCmd represents the status command
 var statusCmd = &cobra.Command{
 	Use:   "status [account]",
-	Short: "Get the registration status of an account",	
-    Args: cobra.ExactArgs(1),
+	Short: "Get the registration status of an account",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var formData = map[string]string{
 			"account": args[0],

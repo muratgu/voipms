@@ -22,9 +22,9 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"github.com/spf13/cobra"
 	"log"
 	"os"
-	"github.com/spf13/cobra"
 )
 
 var smsFrom string
@@ -33,8 +33,8 @@ var smsFrom string
 var smsCmd = &cobra.Command{
 	Use:   "sms [to] [message]",
 	Short: "Send an SMS",
-	Long: `Send a plain text message from your main DID to a destination phone number`,
-	Args: cobra.ExactArgs(2),
+	Long:  `Send a plain text message from your main DID to a destination phone number`,
+	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		did := os.Getenv("VOIPMS_DID")
 		if did == "" {
@@ -63,5 +63,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// smsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-    	
+
 }
