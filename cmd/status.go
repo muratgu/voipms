@@ -22,8 +22,6 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -34,14 +32,9 @@ var statusCmd = &cobra.Command{
     Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var formData = map[string]string{
-			"account":     args[0],
+			"account": args[0],
 		}
-		if data, err := Post("getRegistrationStatus", formData); err != nil {
-			fmt.Println(err)
-			return
-		} else {
-			fmt.Println(data)
-		}	
+		Println(Post("getRegistrationStatus", formData))
 	},
 }
 

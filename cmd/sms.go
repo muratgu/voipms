@@ -22,7 +22,6 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"github.com/spf13/cobra"
@@ -48,12 +47,7 @@ var smsCmd = &cobra.Command{
 			"dst":     to,
 			"message": msg,
 		}
-		if data, err := Post("sendSMS", formData); err != nil {
-			fmt.Println(err)
-			return
-		} else {
-			fmt.Println(data)
-		}
+		Println(Post("sendSms", formData))
 	},
 }
 

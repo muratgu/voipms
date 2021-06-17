@@ -23,7 +23,6 @@ package cmd
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -96,7 +95,7 @@ func initConfig() {
 	}
 }
 
-func Post(method string, formData map[string]string) (map[string]interface{}, error) {
+func Post(method string, formData map[string]string) (*string, error) {
 	uid := viper.GetString("VOIPMS_API_UID")
 	if uid == "" {
 		log.Fatal("VOIPMS_API_UID undefined")
@@ -141,9 +140,19 @@ func Post(method string, formData map[string]string) (map[string]interface{}, er
 	if err != nil {
 		return nil, err
 	}
+	data := fmt.Sprintf("%s", body)
 
-	var data map[string]interface{}
-	json.Unmarshal(body, &data)
-	return data, nil
+	return &data, nil
 }
 
+func IfSetElse(value bool, whenSet string, whenNotSet string) string { 
+	if value { return whenSet } else { return whenNotSet } 
+}
+
+func Println(data *string, err error) {
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(*data)
+	}
+}

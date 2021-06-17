@@ -22,8 +22,6 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -33,12 +31,7 @@ var ipCmd = &cobra.Command{
 	Short: "Get the client IP address",
 	Args: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		if data, err := Post("getIP", map[string]string{}); err != nil {
-			fmt.Println(err)
-			return
-		} else {
-			fmt.Println(data)
-		}
+		Println(Post("getIP", nil))
 	},
 }
 

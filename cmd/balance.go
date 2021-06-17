@@ -22,26 +22,20 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
+
+var Advanced = false
 
 // balanceCmd represents the balance command
 var balanceCmd = &cobra.Command{
 	Use:   "balance",
 	Short: "Get the balance",
-	Args: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		var formData = map[string]string{
-			"advanced": "False",
+			"advanced": IfSetElse(Advanced, "1", "0"),
 		}
-		if data, err := Post("getBalance", formData); err != nil {
-			fmt.Println(err)
-			return
-		} else {
-			fmt.Println(data)
-		}
+		Println(Post("getBalance", formData))
 	},
 }
 
@@ -56,5 +50,5 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// balanceCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	balanceCmd.Flags().BoolVarP(&Advanced, "advanced", "a", false, "advanced inquiry")
 }
