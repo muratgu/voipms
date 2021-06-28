@@ -22,9 +22,9 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"log"
-	"os"
+
+	"github.com/spf13/cobra"
 )
 
 var smsFrom string
@@ -35,10 +35,7 @@ var smsCmd = &cobra.Command{
 	Long:  `Send a plain text message from your main DID to a destination phone number`,
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		did := os.Getenv("VOIPMS_DID")
-		if did == "" {
-			log.Fatal("VOIPMS_DID undefined")
-		}
+		did, _ := cmd.Flags().GetString("did")
 		to := args[0]
 		msg := args[1]
 		var formData = map[string]string{
@@ -46,7 +43,8 @@ var smsCmd = &cobra.Command{
 			"dst":     to,
 			"message": msg,
 		}
-		Println(Post("sendSms", formData))
+		log.Println(formData)
+		Println(Post("sendSMS", formData))
 	},
 }
 

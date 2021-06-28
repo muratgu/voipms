@@ -52,6 +52,8 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is ./app.env)")
 
+	rootCmd.PersistentFlags().StringP("did", "", viper.GetString("VOIPMS_DID"), "DID Number")
+
 	rootCmd.Version = "0.0.1"
 }
 
@@ -87,7 +89,7 @@ func Post(method string, formData map[string]string) (*string, error) {
 	formData["api_username"] = uid
 	formData["api_password"] = pwd
 	formData["method"] = method
-
+	
 	payload := &bytes.Buffer{}
 	writer := multipart.NewWriter(payload)
 	for key, element := range formData {
