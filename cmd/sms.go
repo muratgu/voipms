@@ -22,12 +22,8 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"log"
-
 	"github.com/spf13/cobra"
 )
-
-var smsFrom string
 
 var smsCmd = &cobra.Command{
 	Use:   "sms [to] [message]",
@@ -43,7 +39,6 @@ var smsCmd = &cobra.Command{
 			"dst":     to,
 			"message": msg,
 		}
-		log.Println(formData)
 		Println(Post("sendSMS", formData))
 	},
 }
