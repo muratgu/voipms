@@ -22,7 +22,6 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"log"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -39,7 +38,6 @@ var missedCmd = &cobra.Command{
 			"timezone":  "-8",
 			"noanswer":  "1",
 		}
-		log.Println(formData)
 		Println(Post("getCDR", formData))
 	},
 }
