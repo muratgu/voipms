@@ -28,6 +28,7 @@ import (
 	"log"
 	"mime/multipart"
 	"net/http"
+
 	//"os"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -51,8 +52,6 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is ./app.env)")
-
-	rootCmd.PersistentFlags().StringP("did", "", viper.GetString("VOIPMS_DID"), "DID Number")
 
 	rootCmd.Version = "0.0.1"
 }
@@ -83,13 +82,18 @@ func Post(method string, formData map[string]string) (*string, error) {
 	if pwd == "" {
 		log.Fatal("VOIPMS_API_PWD undefined")
 	}
+	did := viper.GetString("VOIPMS_DID")
+	if did == "" {
+		log.Fatal("VOIPMS_DID undefined")
+	}
 	if formData == nil {
 		formData = map[string]string{}
 	}
 	formData["api_username"] = uid
 	formData["api_password"] = pwd
 	formData["method"] = method
-	
+	formData["did"] = did
+
 	payload := &bytes.Buffer{}
 	writer := multipart.NewWriter(payload)
 	for key, element := range formData {

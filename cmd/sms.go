@@ -31,11 +31,9 @@ var smsCmd = &cobra.Command{
 	Long:  `Send a plain text message from your main DID to a destination phone number`,
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		did, _ := cmd.Flags().GetString("did")
 		to := args[0]
 		msg := args[1]
 		var formData = map[string]string{
-			"did":     did,
 			"dst":     to,
 			"message": msg,
 		}
