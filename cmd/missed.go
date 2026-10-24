@@ -29,7 +29,7 @@ import (
 
 var missedCmd = &cobra.Command{
 	Use:   "missed",
-	Short: "List unanswered calls today",
+	Short: "List call detail records for today",
 	Run: func(cmd *cobra.Command, args []string) {
 		now := time.Now().Format("2006-01-02")
 		var formData = map[string]string{
@@ -37,6 +37,8 @@ var missedCmd = &cobra.Command{
 			"date_to":   now,
 			"timezone":  "-8",
 			"noanswer":  "1",
+			"busy":      "1",
+			"failed":    "1",
 		}
 		Println(Post("getCDR", formData))
 	},
